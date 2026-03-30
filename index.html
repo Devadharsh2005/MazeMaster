@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MazeMaster</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>MazeMaster</h1>
+            <p>Navigate the maze! Road: 1 | Sand (Yellow): 3 | Mud (Brown): 5</p>
+            <div class="controls">
+                <button id="btn-start" class="btn primary">Start Maze</button>
+                <button id="btn-reset" class="btn secondary">New Maze</button>
+                <button id="btn-solve" class="btn secondary">Solve for Me</button>
+            </div>
+        </header>
+
+        <div id="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="600"></canvas>
+            
+            <div id="score-overlay" class="hidden">
+                <div class="score-card">
+                    <h2>Level Complete!</h2>
+                    <div class="stats">
+                        <div class="stat">
+                            <span>Your Cost</span>
+                            <span id="stat-user-cost">0</span>
+                        </div>
+                        <div class="stat">
+                            <span>Optimal Cost</span>
+                            <span id="stat-optimal-cost">0</span>
+                        </div>
+                    </div>
+                    <div class="final-score">
+                        <span>Score: </span>
+                        <span id="stat-score">100%</span>
+                    </div>
+                    <p id="dijkstra-explanation" class="explanation-text"></p>
+                    <button id="btn-play-again" class="btn primary">Play Again</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="status-bar">
+            <span>Current Cost: <span id="current-cost">0</span></span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/maze.js"></script>
+    <script src="js/dijkstra.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
