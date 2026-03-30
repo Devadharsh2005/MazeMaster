@@ -1,0 +1,220 @@
+:root {
+    --bg-color: #f8fafc;
+    --text-color: #0f172a;
+    --primary-blue: #3b82f6;
+    --primary-blue-hover: #2563eb;
+    --secondary-gray: #e2e8f0;
+    --secondary-gray-hover: #cbd5e1;
+    --road-color: #ffffff;
+    --sand-color: #fef08a; /* yellow */
+    --mud-color: #8b4513;  /* saddlebrown */
+    --wall-color: #1e293b;
+    --start-color: #4ade80; /* green */
+    --end-color: #ef4444;   /* red */
+    --optimal-path: rgba(168, 85, 247, 0.4); /* purple */
+    --user-path: rgba(59, 130, 246, 0.4);    /* blue */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-color), #e2e8f0);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#game-container {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    width: 100%;
+    max-width: 660px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    color: var(--primary-blue);
+}
+
+header p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn.primary {
+    background-color: var(--primary-blue);
+    color: white;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.btn.primary:hover {
+    background-color: var(--primary-blue-hover);
+    transform: translateY(-1px);
+}
+
+.btn.secondary {
+    background-color: var(--secondary-gray);
+    color: var(--text-color);
+}
+
+.btn.secondary:hover {
+    background-color: var(--secondary-gray-hover);
+}
+
+#canvas-wrapper {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--road-color);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#score-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 10;
+}
+
+#score-overlay:not(.hidden) {
+    opacity: 1;
+}
+
+.hidden {
+    pointer-events: none;
+    /* Opacity handled by transition above for smooth fade */
+}
+
+.score-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    width: 80%;
+    max-width: 350px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+#score-overlay:not(.hidden) .score-card {
+    transform: translateY(0);
+}
+
+.score-card h2 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.stat {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat span:first-child {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 5px;
+}
+
+.stat span:last-child {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+
+.final-score {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    color: #10b981; /* Green */
+}
+
+.explanation-text {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 25px;
+    line-height: 1.4;
+    text-align: left;
+    background-color: var(--bg-color);
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid var(--optimal-path);
+}
+
+#status-bar {
+    text-align: center;
+    font-weight: 600;
+    color: #475569;
+}
+
+#current-cost {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+}
